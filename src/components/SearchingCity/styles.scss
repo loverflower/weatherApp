@@ -1,0 +1,154 @@
+@import "/src/styles/btn";
+@import "/src/styles/variables";
+
+.searching-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $lemonChiffonYellow;
+  @include border-radius;
+  margin-top: 10px;
+  padding: 0 5px;
+  position: sticky;
+  top: 0px;
+  z-index: 999;
+  padding-top: 10px;
+  transition: background-color 0.6s;
+
+  &__buttons-wrapper .btn:not(:last-child) {
+    margin-right: 30px;
+  }
+
+  &__error {
+    color: $red;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__input,
+  &__input:focus {
+    width: 70px;
+    height: 20px;
+    border-radius: 5px;
+    border: 2px solid $suvaGrey;
+  }
+  &__input:focus {
+    outline: none;
+  }
+  &__select {
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid $suvaGrey;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+  &__input:last-of-type {
+    margin-left: 5px;
+  }
+
+  &__input:disabled {
+    background-color: $suvaGrey;
+    color: $red;
+  }
+
+  &__label {
+    margin-right: 5px;
+  }
+
+  &__select {
+    margin: 10px;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__select {
+    display: block;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 500;
+    color: $charcoalGrey;
+    line-height: 1.3;
+    padding: 0.2em 1em 0.2em 0.8em;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 5px;
+    border: 1px solid $suvaGrey;
+    box-shadow: 0 1px 0 1px rgba($black, 0.04);
+    border-radius: 0.5em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $white;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
+      linear-gradient(to bottom, $white 0%, $whiteSmokeWhite 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right 0.4em top 50%, 0 0;
+    background-size: 0.65em auto, 100%;
+  }
+  &__select::-ms-expand {
+    display: none;
+  }
+  &__select:hover {
+    border-color: $suvaGrey;
+  }
+  &__select:focus {
+    outline: none;
+  }
+  &__select option {
+    font-weight: normal;
+  }
+  *[dir="rtl"] &__select,
+  :root:lang(ar) &__select,
+  :root:lang(iw) &__select {
+    background-position: left 0.7em top 50%, 0 0;
+    padding: 0.6em 0.8em 0.5em 1.4em;
+  }
+}
+
+.errorInputForm {
+  border: 2px solid $red;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: $red;
+  opacity: 0;
+  height: 0;
+  visibility: hidden;
+  transition: height 1.4s, opacity 0.4s;
+  &__punish {
+    height: 60px;
+    width: auto;
+  }
+}
+
+.showMessage {
+  visibility: visible;
+  height: auto;
+  opacity: 1;
+}
+
+.sticky-searching {
+  background-color: $mintGreen;
+  border-radius: 0 0 5px 5px;
+}
+
+.activeLabel {
+  color: $white;
+}
+
+.activePopupInput {
+  border: 2px solid $red;
+}

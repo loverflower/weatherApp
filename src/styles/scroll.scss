@@ -1,0 +1,17 @@
+@import "/src/styles/variables";
+
+.scroll {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: $denimBlue;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba($black, 0.2);
+    background-color: $white;
+  }
+}

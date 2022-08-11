@@ -1,0 +1,73 @@
+@import "/src/styles/variables";
+
+.popup-container {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  width: 170px;
+  min-height: 100px;
+  background-color: $whiteSmokeWhite;
+  z-index: 100;
+  transform: scale(0, 0);
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px 0 10px;
+  transform-origin: right top;
+  border-radius: 5px;
+  box-shadow: 0px 3px 6px rgba($black, 0.4);
+  font-size: 14px;
+  &__cross {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+  }
+  &__svg {
+    height: 12px;
+    width: 12px;
+    transition: all 0.2s;
+  }
+
+  &__svg:hover {
+    fill: $bittersweetOrange;
+  }
+  &__toggle {
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__select {
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__input {
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__btn-margin {
+    margin-left: 5px;
+  }
+}
+
+.infoContainerPopupActive {
+  transform: scale(1);
+}
+
+.select-small,
+.input-small {
+  width: 70px;
+  margin: 0 !important;
+}
+
+.input-small:disabled {
+  background-color: $veryLightGrey;
+  border: 2px solid $suvaGrey;
+}

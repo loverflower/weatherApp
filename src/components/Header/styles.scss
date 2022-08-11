@@ -1,0 +1,70 @@
+@import "/src/styles/variables";
+
+.header {
+  background-color: $lemonChiffonYellow;
+  padding: 5px;
+  @include border-radius;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  &__measure {
+    width: 50%;
+    margin: 0 auto;
+  }
+  &__measure div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__time,
+  &__location,
+  &__toggle {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__location {
+    align-items: center;
+  }
+
+  &__temperature {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    justify-content: space-around;
+  }
+
+  &__weather-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
+  &__img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.no-bookmarked-cities {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-small {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}

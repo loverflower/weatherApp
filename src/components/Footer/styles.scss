@@ -1,0 +1,12 @@
+@import "/src/styles/variables";
+
+.footer {
+  width: 100%;
+  border-radius: 5px;
+  background-color: $lemonChiffonYellow;
+  min-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}

@@ -1,0 +1,77 @@
+@import "/src/styles/variables.scss";
+
+.info-container {
+  width: 100%;
+  height: 203px;
+  background-color: $columbiaBlue;
+  position: relative;
+  border-radius: 5px;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__burger {
+    width: 10px;
+    height: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  &__item {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: $pinkRed;
+    position: absolute;
+    transition: all 0.2s;
+  }
+
+  &__burger:hover &__item {
+    background-color: $bittersweetOrange;
+  }
+
+  &__item:first-child {
+    top: 0px;
+  }
+
+  &__item:nth-child(2) {
+    top: 10px;
+  }
+  &__item:last-child {
+    top: 20px;
+  }
+  &__star {
+    width: 15px;
+    height: 15px;
+    fill: $yellow;
+  }
+
+  &__cross {
+    width: 15px;
+    height: 15px;
+    fill: $pinkRed;
+    transition: all 0.4s;
+  }
+
+  &__cross:hover {
+    fill: $bittersweetOrange;
+  }
+
+  &__star-container {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__clear {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 100%;
+    transform: translateY(-100%);
+  }
+}

@@ -1,0 +1,20 @@
+@mixin border-radius {
+  border-radius: 5px;
+}
+$black: #000000;
+$white: #ffff;
+$red: #ff0000;
+$yellow: #ffff00;
+$lemonChiffonYellow: #fffab6; // layouts
+$veryLightGrey: #cccccc; // main container
+$royalBlue: #4676d7; //  color of unhovered buttons color
+$bittersweetOrange: #ff6c6c; // color of hovered buttons
+$columbiaBlue: #6793fa; // cards color
+$pinkRed: #ffd1d1; // color of cross and burger elements
+$mintGreen: #272727e5; //sticky header;
+$maroonBrown: #800202; //favorite items active color;
+$charcoalGrey: #474747; // color favorite items H3
+$whiteSmokeWhite: #ebe9ea; // color favorite items H3
+$denimBlue: #127ab6; // color of scroll
+$periwinkleBlue: #bbc1e1; // border toggle-button
+$suvaGrey: #888; // hover select

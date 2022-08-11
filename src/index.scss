@@ -1,0 +1,25 @@
+@import "normalize.css";
+@import "/src/styles/base";
+@import "/src/styles/variables";
+
+body {
+  background-image: url("./img/sky.jpg");
+  &::-webkit-scrollbar {
+    width: 13px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: $denimBlue;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba($black, 0.2);
+    background-color: $white;
+  }
+
+  -moz-user-select: none; /* Mozilla Firefox */
+  -ms-user-select: none; /* Internet Explorer (не поддерживается) */
+  -o-user-select: none; /* Opera Presto (не поддерживается) */
+  -webkit-user-select: none; /* Google Chrome, Opera Next, Safari */
+}
