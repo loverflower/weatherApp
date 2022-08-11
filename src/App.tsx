@@ -59,6 +59,7 @@ function App() {
       <SearchingCities />
       <ForecastWrapper />
       <Footer />
+      {'Helloy'}
     </main>
   );
 }
