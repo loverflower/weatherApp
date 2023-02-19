@@ -1,0 +1,11 @@
+@import "/src/styles/variables";
+
+.toast {
+  background-color: rgb(215, 18, 18);
+  color: white;
+  position: absolute;
+  bottom: 10%;
+  padding: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

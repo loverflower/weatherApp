@@ -9,11 +9,14 @@ import { getWeatherByCoords } from "./api/weatherAPI";
 import { transformResult } from "./services/transformResult";
 import { CurrentCityType } from "./types/commonTypes";
 import { setBookMarkedCity } from "./redux/reducer";
-import { getBookmarkedCities } from "./services/localStorageCities";
 import { Unit } from "./types/enum";
 import "./App.scss";
+import { checkAuth, getOptions } from "./serviceAxios/UIActions";
+import { useGettingUser } from "./hooks/useScroll";
+import { ToastWidget } from "./components/Toast/ToastWidget";
 
 function App() {
+  const [user] = useGettingUser();
   const [currentCity, setCurrentCity] = useState<CurrentCityType | undefined>();
   const [temperatureType, setTemperatureType] = useState(Unit.Celsius);
   const dispatch = useAppDispatch();
@@ -30,6 +33,14 @@ function App() {
 
   useEffect(() => {
     (async () => {
+      if (localStorage.getItem("token")) {
+        await checkAuth(dispatch);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
       const coordinates = await getGeolocation();
       const result = await getWeatherByCoords(coordinates);
       const correctResult = transformResult(result);
@@ -39,15 +50,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (localStorage) {
-      const finalResult = getBookmarkedCities();
-      finalResult?.forEach((element) => {
-        if (element) {
-          dispatch(setBookMarkedCity(element));
-        }
-      });
+    if (user == null) {
+      return;
     }
-  }, []);
+
+    (async () => {
+      const result = await getOptions(user.id, dispatch);
+      dispatch(setBookMarkedCity(result));
+    })();
+  }, [user, dispatch]);
 
   return (
     <main className="container">
@@ -59,7 +70,7 @@ function App() {
       <SearchingCities />
       <ForecastWrapper />
       <Footer />
-      {'Helloy'}
+      <ToastWidget />
     </main>
   );
 }

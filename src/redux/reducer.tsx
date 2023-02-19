@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getNextViewType } from "../helpers/temperatureType";
+import { IUser } from "../models/response/AuthResponse";
 import { SearchOption } from "../types/enum";
 import { FormattedFormResultType } from "./../types/commonTypes/index";
 export const toggleTempReducer = createSlice({
@@ -14,6 +15,60 @@ export const toggleTempReducer = createSlice({
 
 export const TempReducer = toggleTempReducer.reducer;
 export const { toggleTempAction } = toggleTempReducer.actions;
+
+export const authSliceReducer = createSlice({
+  name: "AuthReducer",
+  initialState: { auth: false, isLoadingAuth: false },
+  reducers: {
+    authAction(state, action) {
+      state.auth = action.payload;
+    },
+    setIsLoadingAuth(state, action) {
+      state.isLoadingAuth = action.payload;
+    },
+  },
+});
+
+export const AuthReducer = authSliceReducer.reducer;
+export const { authAction, setIsLoadingAuth } = authSliceReducer.actions;
+
+export const userSliceReducer = createSlice({
+  name: "UserReducer",
+  initialState: { user: {} as IUser, isLoadingUser: false },
+  reducers: {
+    setUser(state, action) {
+      state.user = action.payload;
+    },
+    setIsLoadingUser(state, action) {
+      state.isLoadingUser = action.payload;
+    },
+  },
+});
+
+export const UserReducer = userSliceReducer.reducer;
+export const { setUser, setIsLoadingUser } = userSliceReducer.actions;
+
+export const ErrorToastSliceReducer = createSlice({
+  name: "toastReducer",
+  initialState: { errorsMessages: [] as Array<string> },
+  reducers: {
+    setErrors(state, action) {
+      state.errorsMessages.push(action.payload);
+    },
+    // setIsLoadingUser(state, action) {
+    //   state.isLoadingUser = action.payload;
+    // },
+    deleteErrors(state, action) {
+      state.errorsMessages = action.payload;
+    },
+    // setIsLoadingUser(state, action) {
+    //   state.isLoadingUser = action.payload;
+    // },
+  },
+});
+
+export const ErrorToastReducer = ErrorToastSliceReducer.reducer;
+export const { setErrors, deleteErrors } = ErrorToastSliceReducer.actions;
 
 export const ForecastCitiesReducer = createSlice({
   name: "ForecastCitiesReducer",
@@ -126,16 +181,10 @@ export const BookMarkedWeatherReducer = createSlice({
   },
   reducers: {
     setBookMarkedCity(state, action) {
-      const { formName, graphOptions, id, name, selectViewPanel } =
-        action.payload;
-      state.bookMarkedCities.push({
-        formName,
-        graphOptions,
-        id,
-        name,
-        bookMarked: true,
-        selectViewPanel,
-      });
+      // const { formName, graphOptions, id, name, selectViewPanel } =
+      //   action.payload;
+      console.log(action.payload, "!!!!action.payload!!!!");
+      state.bookMarkedCities = action.payload;
     },
     deleteBookMarkedCity(state, action) {
       state.bookMarkedCities = state.bookMarkedCities.filter(

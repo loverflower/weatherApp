@@ -1,10 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { IUploadOptions } from "@testing-library/user-event";
 import { useDispatch } from "react-redux";
+import { IUser } from "../models/response/AuthResponse";
 import {
   BookMarkedWeather,
   ForecastCities,
   ProcessOfGettingData,
   TempReducer,
+  AuthReducer,
+  UserReducer,
+  ErrorToastReducer,
 } from "./reducer";
 
 export type LoadingDataType = {
@@ -19,6 +24,9 @@ const rootReducer = combineReducers({
   forecastCities: ForecastCities,
   loadingData: ProcessOfGettingData,
   bookMarkedCities: BookMarkedWeather,
+  errors: ErrorToastReducer,
+  userInfo: UserReducer,
+  auth: AuthReducer,
 });
 
 export const mainStore = configureStore({

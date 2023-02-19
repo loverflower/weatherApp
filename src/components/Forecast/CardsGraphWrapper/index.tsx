@@ -3,13 +3,12 @@ import { useState, useEffect, useRef, BaseSyntheticEvent } from "react";
 import { RootState, useAppDispatch } from "../../../redux";
 import {
   addGraphOptionsAction,
-  deleteBookMarkedCity,
   removeForecastCityAction,
   setBookMarkedCity,
 } from "../../../redux/reducer";
 import Card from "./Card";
 import Graph from "./Graph";
-import { setBookmarkedCities } from "../../../services/localStorageCities";
+
 import { SelectPanelViewOption, Unit } from "../../../types/enum";
 import { CardsGraphWrapperType } from "./types";
 import sprite from "../../../svg/sprite.svg";
@@ -19,17 +18,24 @@ import { NUMBER_OF_ITEM } from "../../../constants";
 import Popup from "../../Popup";
 import { getFunctionOptions } from "../../../services/getGraphOptions";
 import { toggleTemp } from "../../../helpers/temperatureType";
-import { InitialGraphOptionsType } from "../../../types/commonTypes";
+import {
+  FormattedFormResultType,
+  InitialGraphOptionsType,
+} from "../../../types/commonTypes";
+import { addOption, deleteOption } from "../../../serviceAxios/UIActions";
+import { useGettingUser } from "../../../hooks/useScroll";
 
 export const CardsGraphWrapper = ({
   infoCities: { id, selectViewPanel, daily, name, bookMarked },
 }: CardsGraphWrapperType) => {
-  const [isShowingStar, setShowingStar] = useState(false);
+  const [isShowingStar, setShowingStar] = useState(!!bookMarked);
   const [panelBurgerView, setShowingPanelBurger] = useState(false);
   const dispatch = useAppDispatch();
   const listOfForecastCities = useSelector(
     (state: RootState) => state.forecastCities.cities
   );
+
+  const [user, isLoading] = useGettingUser();
 
   const currentCity = listOfForecastCities.find((item) => item.name === name);
 
@@ -48,17 +54,21 @@ export const CardsGraphWrapper = ({
     useState<InitialGraphOptionsType>();
   const cardBox: any = useRef();
 
-  const bookMarkedLength = bookMarkedCities.length;
-
-  const handleStar = () => {
+  const handleStar = async () => {
     if (isShowingStar) {
-      dispatch(deleteBookMarkedCity(currentCity?.id));
+      const result = await deleteOption(currentCity!.id, user!.id, dispatch);
+      dispatch(setBookMarkedCity(result));
     } else {
+      console.log("WWW");
       const bookMarkedCity = bookMarkedCities.find(
         (item) => item.name === name
       );
       if (!bookMarkedCity) {
-        dispatch(setBookMarkedCity(currentCity));
+        const optionSend = {
+          option: getBookmarkedData(currentCity!),
+          userId: user!.id,
+        };
+        addOption(optionSend, dispatch);
       }
     }
 
@@ -85,9 +95,6 @@ export const CardsGraphWrapper = ({
   };
 
   useEffect(() => {
-    if (bookMarked) {
-      setShowingStar(true);
-    }
     const box = cardBox.current;
     box.addEventListener("click", hidePaneViewBurger);
 
@@ -95,10 +102,6 @@ export const CardsGraphWrapper = ({
       box.removeEventListener("click", hidePaneViewBurger);
     };
   }, []);
-
-  useEffect(() => {
-    setBookmarkedCities(bookMarkedCities);
-  }, [bookMarkedLength]);
 
   useEffect(() => {
     const toggleOptions = {
@@ -134,13 +137,17 @@ export const CardsGraphWrapper = ({
         {getArrayContainerItem(NUMBER_OF_ITEM)}
       </div>
       <div className="info-container__star-container">
-        <svg className="info-container__star" onClick={handleStar}>
-          <use
-            href={`${sprite}${
-              isShowingStar ? "#icon-star-full" : "#icon-star-empty"
-            }`}
-          />
-        </svg>
+        {user && (
+          <svg className="info-container__star" onClick={handleStar}>
+            (
+            <use
+              href={`${sprite}${
+                isShowingStar ? "#icon-star-full" : "#icon-star-empty"
+              }`}
+            />
+            )
+          </svg>
+        )}
       </div>
       <div onClick={removeInfo} className="info-container__clear">
         <svg className="info-container__cross">
@@ -158,5 +165,11 @@ export const CardsGraphWrapper = ({
     </div>
   );
 };
+
+function getBookmarkedData(data: FormattedFormResultType) {
+  const { daily, inputCity, ...rest } = data;
+
+  return { ...rest, bookMarked: true };
+}
 
 export default CardsGraphWrapper;

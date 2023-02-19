@@ -20,10 +20,16 @@ import "../../styles/btn.scss";
 import "../../styles/fillout.scss";
 import "../../styles/scroll.scss";
 import "../Forecast/CardsGraphWrapper/styles.scss";
+import LoginForm from "../Login/LoginForm";
+import { useGettingUser } from "../../hooks/useScroll";
 
 const Header = ({ currentCity }: headerProps) => {
   const [showingFillOut, setShowingFillOut] = useState(false);
   const [isToggleButtonActive, setToggleButton] = useState(false);
+
+  const [user] = useGettingUser();
+
+  console.log(user, "user!!!");
 
   const dispatch = useAppDispatch();
   const temperatureType = useSelector(
@@ -33,6 +39,8 @@ const Header = ({ currentCity }: headerProps) => {
   const bookedMarkedCities = useSelector(
     (state: RootState) => state.bookMarkedCities.bookMarkedCities
   );
+
+  console.log(bookedMarkedCities, "bookedMarkedCities!!!");
 
   const handleFillOut = () => setShowingFillOut((prev) => !prev);
   const handleToggle = () => {
@@ -44,12 +52,7 @@ const Header = ({ currentCity }: headerProps) => {
     <header className="header">
       <div className="header__container">
         <div className="header__time">
-          {currentCity && (
-            <>
-              <span>Your city: {currentCity?.name} </span>
-              <CurrentTime />
-            </>
-          )}
+          <LoginForm />
         </div>
 
         <div className="header__location">
@@ -87,6 +90,7 @@ const Header = ({ currentCity }: headerProps) => {
               active: showingFillOut,
             })}
             onClick={handleFillOut}
+            disabled={!user?.isActivated}
           >
             {showingFillOut ? "Hide favorite cities" : "Show favorite cities"}
           </button>
